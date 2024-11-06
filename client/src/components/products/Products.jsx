@@ -48,7 +48,7 @@ const Products = () => {
 
 
     return (
-        <div className="p-8 bg-gradient-to-b from-black to-gray-900 text-white flex flex-col">
+        <div className="p-8 bg-black text-white flex flex-col">
         <h2 className="text-3xl font-bold text-center mb-8">Products</h2>
         <div className="">
             <div className="grid grid-cols-2 md:grid-cols-3  gap-6 max-w-6xl mx-auto">
@@ -56,8 +56,8 @@ const Products = () => {
                 {status === "failed" && <p className="text-center text-red-500">Error:  Failed to fetch products.</p>}
 
                 {items.map((product) => (
-                    <div key={product._id} className=" hover:bg-gray-900 rounded-lg shadow-lg p-4 flex flex-col items-center">
-                        <img src={product.image} alt={product.name} className="w-52 h-44 object-cover mb-4 rounded" />
+                    <div key={product._id} className=" hover:bg-gray-500/20 rounded-lg shadow-lg p-4 flex flex-col items-center">
+                        <img src={product.image} alt={product.name} className="w-52 h-44 object-cover mb-4 rounded hover:scale-110 duration-200" />
                         <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
                        <Link to={`/products/${product._id}`}>
                        <button className="mt-auto bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">

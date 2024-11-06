@@ -37,7 +37,7 @@ const ShowProduct = () => {
     if (!product) return <div>Loading...</div>;
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-black to-gray-900 text-white p-8">
+        <div className="flex items-center justify-center min-h-screen bg-black text-white p-8">
             <div className="bg-gray-800 p-10 rounded-lg shadow-lg flex">
                 {/* Image Section */}
                 <div className="mr-8">

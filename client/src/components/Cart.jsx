@@ -18,11 +18,11 @@ const CartPage = () => {
    
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-black to-gray-900 text-white p-8 flex justify-center">
+        <div className="min-h-screen bg-black text-white p-8 flex justify-center">
             <div className="flex w-full max-w-5xl">
                 {/* Left Side - Cart Items */}
                 
-                <div className="w-2/3 mr-6 bg-gray-800 p-6 rounded-lg shadow-lg">
+                <div className={`${cartItems.length == 0? "w-full":"w-2/3"} mr-6 bg-gray-800 p-6 rounded-lg shadow-lg`}>
 
                <div className='flex justify-between items-center'>
                <h2 className="text-2xl font-bold mb-4">Total Products in Cart: {cartItems.length}</h2>
