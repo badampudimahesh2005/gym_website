@@ -48,7 +48,7 @@ const Products = () => {
 
 
     return (
-        <div className="p-8 bg-black text-white flex flex-col">
+        <div className="p-8 bg-gradient-to-b from-gray-700 to-black text-white flex flex-col">
         <h2 className="text-3xl font-bold text-center mb-8">Products</h2>
         <div className="">
             <div className="grid grid-cols-2 md:grid-cols-3  gap-6 max-w-6xl mx-auto">

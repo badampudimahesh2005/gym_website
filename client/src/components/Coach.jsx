@@ -2,7 +2,7 @@ import React from "react";
 
 const Coach = () => {
   return (
-    <div className="bg-black">
+    <div className="bg-gradient-to-b from-gray-700 to-black">
       {/* Header Section */}
       <div className="w-full text-center py-10">
         <div className="w-full px-10">
