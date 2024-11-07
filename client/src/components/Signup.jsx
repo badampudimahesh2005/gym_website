@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 // import { login } from "../../../redux/auth/auth.actions";
 // import { registerUser } from "../../../redux/register/register.actions";
 // import gymbro from "../assets/gymBro.gif";
+import apiClient from "../lib/apiClient";
 import { FaRegEyeSlash,FaRegEye} from "react-icons/fa";
 
  const Signup = () => {
@@ -44,6 +45,20 @@ import { FaRegEyeSlash,FaRegEye} from "react-icons/fa";
     //   dispatch(registerUser(user));
       setUser(defaultValues);
       alert("Your account is created. We've created your account for you.");
+    }
+  };
+
+
+  const handleSignup = async () => {
+    try {
+      const response=await apiClient.post('/auth/register', user);
+      alert('Registration successful! Please log in.');
+    //   if(response.status === 201){
+    //     setUserInfo(response.data.user);
+    //     navigate("/profile")
+    // }
+    } catch (error) {
+      alert('Error: ' + error.response?.data?.message || 'Registration failed');
     }
   };
 
@@ -148,7 +163,7 @@ import { FaRegEyeSlash,FaRegEye} from "react-icons/fa";
             </button>
           </div>
           <button
-            onClick={handleClick}
+            onClick={handleSignup}
             className="w-full py-2 mt-6 bg-blue-600 hover:bg-blue-500 rounded-md text-white font-semibold"
           >
             Sign up
