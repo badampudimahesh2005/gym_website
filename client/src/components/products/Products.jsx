@@ -93,7 +93,7 @@ const Products = () => {
                 {items.map((product) => (
                     <div key={product._id} className=" hover:bg-gray-500/20 rounded-lg shadow-lg  flex flex-col items-center">
                         <img src={product.image} alt={product.name} className="w-48 h-48 object-fill mb-4 rounded hover:scale-110 duration-200" />
-                        <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
+                        <h3 className="text-lg font-semibold mb-2 text-white">{product.name}</h3>
                        <Link to={`/products/${product._id}`}>
                        <button className="mt-auto bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 m-2 rounded">
                             view details

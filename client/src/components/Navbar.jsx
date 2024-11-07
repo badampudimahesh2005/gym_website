@@ -30,9 +30,11 @@ const Navbar = () => {
 
         {/* Buttons and Icons */}
         <div className="flex items-center space-x-4 mt-4 md:mt-0">
+          <Link to="/login">
           <button className="border border-white text-white px-4 py-1 rounded-lg hover:bg-white hover:text-gray-900 transition">
             Sign in
           </button>
+          </Link>
           <Link to="/register">
           <button className="bg-blue-500 text-white px-4 py-1 rounded-lg hover:bg-blue-600 transition">
             Register

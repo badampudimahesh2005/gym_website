@@ -45,7 +45,7 @@ const AddProduct = () => {
                 placeholder="Product Name"
                 value={product.name}
                 onChange={handleInputChange}
-                className="p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500  text-white"
+                className="p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500  text-black"
               />
             </div>
       
@@ -57,7 +57,7 @@ const AddProduct = () => {
                 placeholder="Description"
                 value={product.description}
                 onChange={handleInputChange}
-                className="p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500  text-white"
+                className="p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500  text-black"
               />
             </div>
       
@@ -69,7 +69,7 @@ const AddProduct = () => {
                 placeholder="Price"
                 value={product.price}
                 onChange={handleInputChange}
-                className="p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500  text-white"
+                className="p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500  text-black"
               />
             </div>
       
@@ -81,7 +81,7 @@ const AddProduct = () => {
                 placeholder="Image URL"
                 value={product.image}
                 onChange={handleInputChange}
-                className="p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500  text-white"
+                className="p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500  text-black"
               />
             </div>
       
@@ -93,7 +93,7 @@ const AddProduct = () => {
                 placeholder="Category"
                 value={product.category}
                 onChange={handleInputChange}
-                className="p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500  text-white"
+                className="p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500  text-black"
               />
             </div>
       
