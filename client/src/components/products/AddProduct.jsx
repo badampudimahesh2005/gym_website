@@ -33,16 +33,16 @@ const AddProduct = () => {
 
     return (
         <div className="flex items-center justify-center h-screen bg-gradient-to-b from-black to-gray-900">
-            <div className="bg-gray-800 p-10 rounded-lg shadow-md ">
+            <div className="bg-gray-800/50 p-10 rounded-lg shadow-md w-full max-w-2xl">
                 <h2 className="text-3xl font-bold text-center mb-6 text-white">Add New Product</h2>
-                <div className="flex flex-col ">
+                <div className="flex flex-col items-center justify-center ">
                     <input
                         type="text"
                         name="name"
                         placeholder="Product Name"
                         value={product.name}
                         onChange={handleInputChange}
-                        className="mb-4 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="m-3 w-2/3  p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                     <input
                         type="text"
@@ -50,7 +50,7 @@ const AddProduct = () => {
                         placeholder="Description"
                         value={product.description}
                         onChange={handleInputChange}
-                               className="mb-4 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"      
+                               className="m-3 w-2/3 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"      
                     />
                     <input
                         type="number"
@@ -58,7 +58,7 @@ const AddProduct = () => {
                         placeholder="Price"
                         value={product.price}
                         onChange={handleInputChange}
-                               className="mb-4 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                               className="m-3 w-2/3 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                     <input
                         type="text"
@@ -66,7 +66,7 @@ const AddProduct = () => {
                         placeholder="Image URL"
                         value={product.image}
                         onChange={handleInputChange}
-                               className="mb-4 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                               className="m-3 w-2/3 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                     <input
                         type="text"
@@ -74,9 +74,9 @@ const AddProduct = () => {
                         placeholder="Category"
                         value={product.category}
                         onChange={handleInputChange}
-                               className="mb-4 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                               className="m-3 w-2/3 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
-                    <label className="flex items-center space-x-2 text-gray-300">
+                    <label className="flex self-start space-x-2 text-gray-300">
                         <input
                             type="checkbox"
                             name="inStock"
@@ -88,7 +88,7 @@ const AddProduct = () => {
                     </label>
                     <button
                         onClick={handleAddProduct}
-                        className="w-full p-2 mt-4 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded transition duration-300"
+                        className=" px-4 py-2 mt-4 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded transition duration-300"
                     >
                         Add Product
                     </button>
