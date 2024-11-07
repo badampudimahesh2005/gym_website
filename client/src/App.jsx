@@ -15,6 +15,7 @@ import AddProduct from "./components/products/AddProduct";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ShowProduct from "./components/products/ShowProduct";
 import Cart from "./components/Cart";
+import Signup from "./components/Signup";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -40,6 +41,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/plans" element={<WorkoutPlans />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/register" element={<Signup />} />
 
         </Routes>
         <Footer />

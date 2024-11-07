@@ -33,9 +33,11 @@ const Navbar = () => {
           <button className="border border-white text-white px-4 py-1 rounded-lg hover:bg-white hover:text-gray-900 transition">
             Sign in
           </button>
+          <Link to="/register">
           <button className="bg-blue-500 text-white px-4 py-1 rounded-lg hover:bg-blue-600 transition">
             Register
           </button>
+          </Link>
           <FiHeart className="text-xl hover:text-blue-500 transition cursor-pointer" />
           <Link to="/cart" className="text-xl hover:text-blue-500 transition cursor-pointer relative">
           <FiShoppingBag  />
