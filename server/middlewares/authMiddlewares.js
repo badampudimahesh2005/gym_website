@@ -1,9 +1,14 @@
-// middleware/authMiddleware.js
-const ensureAuthenticated = (req, res, next) => {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    res.status(401).json({ message: 'Please log in to access this resource' });
-};
+import jwt from 'jsonwebtoken';
 
-module.exports = ensureAuthenticated;
+export const verifyToken = (req, res, next) => {
+    const token = req.cookies.jwt;
+    if (!token) return res.status(401).send("you are not authenticated");
+    jwt.verify(token, process.env.JWT_KEY, async (err, payload) => {
+        if (err) return res.status(403).send("token is not valid");
+        req.userId = payload.id;
+        next();
+    }); 
+   
+
+    
+};

@@ -22,10 +22,9 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await apiClient.post('/auth/login', credentials);
-      const token = response.data.token;
-      localStorage.setItem('token', token);  // Store token in localStorage
-    //   alert('Login successful');
+      const response = await apiClient.post('/auth/login',credentials, {withCredentials: true});
+    
+    alert('Login successful');
     navigate('/');
     } catch (error) {
       alert('Login failed: ' + error.response?.data?.message);

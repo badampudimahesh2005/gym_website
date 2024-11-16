@@ -10,6 +10,7 @@ const passportConfig = require("./config/passportConfig");
 const authRoutes = require("./routes/auth");
 dotenv.config();
 
+
 const app = express();
 passportConfig(passport);
 
@@ -25,7 +26,7 @@ app.use(cors({
 app.use(express.json()); // For parsing JSON bodies
 app.use(express.urlencoded({ extended: true })); // For parsing URL-encoded bodies
 app.use(session({
-  secret: 'yourSecretKey',
+  secret: process.env.JWT_SECRET,
   resave: false,
   saveUninitialized: false,
 }));

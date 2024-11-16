@@ -7,7 +7,13 @@ const userSchema = new mongoose.Schema({
     lastName: String,
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    // Additional user fields like age, gender, height, etc.
+   
+    age: { type: Number, required: true  },
+    height: { type: Number, required: true },
+    gender: { type: String, required: true },
+    weight: { type: Number, required: true },
+
+
 });
 
 userSchema.pre('save', async function (next) {

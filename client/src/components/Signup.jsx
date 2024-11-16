@@ -51,7 +51,7 @@ import { FaRegEyeSlash,FaRegEye} from "react-icons/fa";
 
   const handleSignup = async () => {
     try {
-      const response=await apiClient.post('/auth/register', user);
+      const response=await apiClient.post('/auth/register', user,{withCredentials:true});
       alert('Registration successful! Please log in.');
     //   if(response.status === 201){
     //     setUserInfo(response.data.user);
