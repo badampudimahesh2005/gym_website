@@ -1,6 +1,6 @@
 // src/landing-page/RegisterSection.jsx
 import React from "react";
-import backgroundImage from "./front-images/front4.jpg"; 
+import backgroundImage from "./front-images/front5.jpg"; 
 
 const RegisterSection = () => {
   return (

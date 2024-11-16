@@ -1,13 +1,31 @@
 
 
 import { FiHeart, FiShoppingBag } from "react-icons/fi";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-
+import { useSelector,useDispatch } from "react-redux";
+import { logoutUser } from "../store/slices/userSlice";
+import {Link , useNavigate } from "react-router-dom";
+import apiClient from "../lib/apiClient";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const user = useSelector((state) => state.user.user);
 
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+
+ const handleLogout = async () => {
+  try{
+    const response = await apiClient.get("/auth/logout");
+    dispatch(logoutUser());
+    navigate("/login");
+    
+
+  }catch(error){
+    console.error(error);
+    }
+
+ }
   return (
     <nav className="bg-gray-900 text-white py-4 px-6 shadow-lg border-b-2 border-blue-800">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
@@ -30,16 +48,30 @@ const Navbar = () => {
 
         {/* Buttons and Icons */}
         <div className="flex items-center space-x-4 mt-4 md:mt-0">
-          <Link to="/login">
-          <button className="border border-white text-white px-4 py-1 rounded-lg hover:bg-white hover:text-gray-900 transition">
-            Sign in
-          </button>
-          </Link>
-          <Link to="/register">
-          <button className="bg-blue-500 text-white px-4 py-1 rounded-lg hover:bg-blue-600 transition">
-            Register
-          </button>
-          </Link>
+          {user ? ( 
+             <button onClick={handleLogout} className="bg-blue-500 text-white px-4 py-1 rounded-lg hover:bg-blue-600 transition">
+             Logout
+           </button>
+           
+        ) : ( 
+       
+         <>
+         <Link to="/login">
+       <button className="border border-white text-white px-4 py-1 rounded-lg hover:bg-white hover:text-gray-900 transition">
+         Sign in
+       </button>
+       </Link>
+
+         <Link to="/register">
+       <button className="bg-blue-500 text-white px-4 py-1 rounded-lg hover:bg-blue-600 transition">
+         Register
+       </button>
+       </Link>
+        </>  
+        )
+         }
+
+        
           <FiHeart className="text-xl hover:text-blue-500 transition cursor-pointer" />
           <Link to="/cart" className="text-xl hover:text-blue-500 transition cursor-pointer relative">
           <FiShoppingBag  />
