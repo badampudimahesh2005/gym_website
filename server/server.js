@@ -16,7 +16,7 @@ passportConfig(passport);
 
 // Configure CORS
 app.use(cors({
-    origin: [process.env.ORIGIN], // Ensure this is set correctly
+    origin: [process.env.ORIGIN], 
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true,
 }));

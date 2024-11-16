@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-// import { login } from "../../../redux/auth/auth.actions";
-// import { registerUser } from "../../../redux/register/register.actions";
-// import gymbro from "../assets/gymBro.gif";
 import apiClient from "../lib/apiClient";
 import { FaRegEyeSlash,FaRegEye} from "react-icons/fa";
+import { setUserData } from "../store/slices/userSlice";
+
 
  const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -53,10 +52,10 @@ import { FaRegEyeSlash,FaRegEye} from "react-icons/fa";
     try {
       const response=await apiClient.post('/auth/register', user,{withCredentials:true});
       alert('Registration successful! Please log in.');
-    //   if(response.status === 201){
-    //     setUserInfo(response.data.user);
-    //     navigate("/profile")
-    // }
+      if(response.status === 201 && response.data.user){
+       dispatch(setUserData(response.data.user));
+        navigate("/profile")
+    }
     } catch (error) {
       alert('Error: ' + error.response?.data?.message || 'Registration failed');
     }

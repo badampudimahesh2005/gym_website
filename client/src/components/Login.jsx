@@ -3,11 +3,14 @@ import apiClient from '../lib/apiClient';
 import { useNavigate } from 'react-router-dom';
 
 import { FaRegEyeSlash,FaRegEye} from "react-icons/fa";
+import { setUserData } from '../store/slices/userSlice';
+import { useDispatch } from 'react-redux';
 
 
 
 const Login = () => {
 
+  const dispatch = useDispatch();
   const [credentials, setCredentials] = useState({
      email: '', 
      password: '' 
@@ -23,8 +26,9 @@ const Login = () => {
   const handleLogin = async () => {
     try {
       const response = await apiClient.post('/auth/login',credentials, {withCredentials: true});
+      dispatch(setUserData(response.data));
+      console.log(response.data);
     
-    alert('Login successful');
     navigate('/');
     } catch (error) {
       alert('Login failed: ' + error.response?.data?.message);
