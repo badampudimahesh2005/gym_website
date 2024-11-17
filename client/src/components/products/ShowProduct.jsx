@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import apiClient from "../../lib/apiClient";
 import { useDispatch } from "react-redux";
 import { addItemToCart } from "../../store/slices/cartSlice";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 const ShowProduct = () => {
@@ -10,6 +12,7 @@ const ShowProduct = () => {
     const [product, setProduct] = useState(null);
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleAddToCart = () => {
         dispatch(addItemToCart({
@@ -33,6 +36,17 @@ const ShowProduct = () => {
 
         fetchProduct();
     }, [id]);
+
+
+    const handleDelete = async () => {
+        try {
+            const response = await apiClient.delete(`/api/products/${id}`);
+            navigate("/products");
+        
+        } catch (error) {
+            console.error("Failed to delete product:", error);
+        }
+    };
 
     if (!product) return <div>Loading...</div>;
 
@@ -60,7 +74,11 @@ const ShowProduct = () => {
                     {/* Quantity and Add to Cart */}
                    
                     <button onClick={handleAddToCart} className="bg-blue-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-600 transition mr-4">Add to Cart</button>
-                   
+                    <Link to={`/update-product/${id}`} >
+                    <button className="bg-blue-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-600 transition mr-4">Edit</button>
+                    </Link>
+                     <button onClick={handleDelete} className="bg-blue-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-600 transition mr-4">Delete</button>
+
                     <div className="mt-6 space-y-2 text-sm text-gray-300">
                         <p>🚚 Free Shipping + returns</p>
                         <p>💬 24/7 Customer Support</p>

@@ -31,14 +31,6 @@ const Products = () => {
 
   
 
-//   const handleEditProduct = async (productId, updatedData) => {
-//       try {
-//           const response = await apiClient.put(`/api/products/${productId}`, updatedData);
-//           dispatch(updateProduct(response.data));
-//       } catch (err) {
-//           console.error("Failed to edit product:", err);
-//       }
-//   };
 
 //   const handleDeleteProduct = async (productId) => {
 //       try {

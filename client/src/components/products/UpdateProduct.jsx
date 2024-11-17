@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React from 'react'
 import { useNavigate } from "react-router-dom";
 import apiClient from "../../lib/apiClient";
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 
-const AddProduct = () => {
+
+const UpdateProduct = () => {
+    const {id} = useParams();
+
     const navigate = useNavigate();
     const [product, setProduct] = useState({
         name: '',
@@ -22,19 +27,34 @@ const AddProduct = () => {
         setProduct({ ...product, inStock: e.target.checked });
     };
 
-    const handleAddProduct = async () => {
-        try {
-            const response= await apiClient.post("/api/products", product,{withCredentials:true});
-            navigate("/products");
-        } catch (err) {
-            console.error("Failed to add product:", err);
-        }
-    };
+    useEffect(() => {
+        // Fetch product details from backend
+        const fetchProduct = async () => {
+            try {
+                const response = await apiClient.get(`/api/products/${id}`);
+                setProduct(response.data);
+            } catch (error) {
+                console.error("Failed to fetch product details:", error);
+            }
+        };
 
+        fetchProduct();
+    }, [id]);
+
+
+        const handleUpdate = async () => {
+            try {
+                const response = await apiClient.put(`/api/products/${id}`, product);
+                navigate(`/products/${id}`);
+            } catch (err) {
+                console.error("Failed to update product:", err);
+            }
+        };
+    
     return (
-        <div className="flex items-center justify-center bg-gradient-to-b from-black to-gray-900 text-white">
+        <div className="flex items-center justify-center  bg-gradient-to-b from-black to-gray-900 text-white">
         <div className="bg-gray-800/50 p-8 rounded-lg shadow-md w-full max-w-xl mt-6 mb-10">
-          <h2 className="text-3xl font-bold text-center mb-6 text-white">Add <span className="text-blue-500">NewProduct</span></h2>
+          <h2 className="text-3xl font-bold text-center mb-6 text-white">Update<span className="text-blue-500">Product</span></h2>
           <div className="flex flex-col items-center justify-center space-y-4">
       
             <div className="flex flex-col w-2/3">
@@ -45,7 +65,7 @@ const AddProduct = () => {
                 placeholder="Product Name"
                 value={product.name}
                 onChange={handleInputChange}
-                className="p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500  text-black"
+                className="p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500  text-gray-600"
               />
             </div>
       
@@ -69,7 +89,7 @@ const AddProduct = () => {
                 placeholder="Price"
                 value={product.price}
                 onChange={handleInputChange}
-                className="p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500  text-black"
+                className="p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500  text-gray-600"
               />
             </div>
       
@@ -81,7 +101,7 @@ const AddProduct = () => {
                 placeholder="Image URL"
                 value={product.image}
                 onChange={handleInputChange}
-                className="p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500  text-black"
+                className="p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500  text-gray-600"
               />
             </div>
       
@@ -93,7 +113,7 @@ const AddProduct = () => {
                 placeholder="Category"
                 value={product.category}
                 onChange={handleInputChange}
-                className="p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500  text-black"
+                className="p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500  text-gray-600"
               />
             </div>
       
@@ -109,16 +129,20 @@ const AddProduct = () => {
             </div>
       
             <button
-              onClick={handleAddProduct}
-              className="px-4 py-2 mt-4 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded transition duration-300"
+              onClick={handleUpdate}
+              className="px-4 py-2 mt-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded transition duration-300"
             >
-              Add Product
+              Update Product
             </button>
           </div>
         </div>
       </div>
       
     );
-};
+}
 
-export default AddProduct;
+
+export default UpdateProduct
+
+
+

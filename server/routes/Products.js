@@ -45,16 +45,32 @@ router.get('/:id',  async (req, res) => {
   }
 });
 
-// // PUT (update) a product by ID
-// router.put('/:id', async (req, res) => {
-//   const updatedProduct = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
-//   res.json(updatedProduct);
-// });
+// PUT (update) a product by ID
+router.put('/:id', async (req, res) => {
+  try{
+    const { name, description, price, image, category, inStock } = req.body;
+  
+  const updatedProduct = await Product.findByIdAndUpdate(req.params.id,{ name, description, price, image, category, inStock }, { new: true });
+  res.status(200).json(updatedProduct);
+  }catch(error){
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
 
-// // DELETE a product by ID
-// router.delete('/:id', async (req, res) => {
-//   await Product.findByIdAndDelete(req.params.id);
-//   res.status(204).send();
-// });
+// DELETE a product by ID
+router.delete('/:id', async (req, res) => {
+try {
+  const {id} = req.params;
+    const product = await Product.findById(id);
+    if (!product) return res.status(404).json({ message: "Product not found" });
+
+    await Product.findByIdAndDelete(id);
+    res.json({ message: "Product deleted" });
+} catch (error) {
+  console.error(error);
+  res.status(500).json({ message: "Server error" });
+}
+});
 
 module.exports = router;

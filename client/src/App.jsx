@@ -9,6 +9,7 @@ import Coach from "./components/Coach";
 import WorkoutPlans from "./components/WorkoutPlans";
 import Footer from "./components/Footer";
 import AddProduct from "./components/products/AddProduct";
+import UpdateProduct from "./components/products/UpdateProduct";
 
 
 
@@ -37,6 +38,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/products" element={<Products />} />
           <Route path="/add-product" element={<AddProduct />} />
+          <Route path="/update-product/:id" element={<UpdateProduct />} />
           <Route path="/products/:id" element={<ShowProduct />} />
           <Route path="/coach" element={<Coach />} />
           <Route path="/about" element={<About />} />
