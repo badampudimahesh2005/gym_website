@@ -1,12 +1,12 @@
 // src/landing-page/RegisterSection.jsx
 import React from "react";
-import backgroundImage from "./front-images/front5.jpg"; 
+import front5 from "./front-images/front4.jpg"; 
 
 const RegisterSection = () => {
   return (
     <div
       className="h-screen bg-cover bg-center flex items-center justify-center relative text-white"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
+      style={{ backgroundImage: `url(${front5})` }}
     >
       {/* Overlay for darkening the background image */}
       <div className="absolute inset-0 bg-black opacity-50"></div>
