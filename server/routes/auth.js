@@ -40,7 +40,9 @@ router.post('/register', async (req, res) => {
                 age: newUser.age,
                 height: newUser.height,
                 weight: newUser.weight,
-                gender: newUser.gender
+                gender: newUser.gender,
+                isAdmin: false,
+
             }
         );
     } catch (error) {
@@ -72,7 +74,9 @@ router.post('/login', async (req, res) => {
                         age: user.age,
                         height: user.height,
                         weight: user.weight,
-                        gender: user.gender
+                        gender: user.gender,
+                        isAdmin: user.isAdmin
+                        
                     }
                 );
                 } catch (error) {

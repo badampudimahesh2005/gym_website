@@ -38,7 +38,7 @@ const Navbar = () => {
        </Link>
 
         {/* Search Bar */}
-        <div className="w-full md:w-1/2 mt-4 md:mt-0 mx-0 md:mx-4">
+        <div className="w-full md:w-1/3 mt-4 md:mt-0 mx-0 md:mx-4">
           <input
             type="text"
             placeholder="Search"
@@ -49,9 +49,12 @@ const Navbar = () => {
         {/* Buttons and Icons */}
         <div className="flex items-center space-x-4 mt-4 md:mt-0">
           {user ? ( 
-             <button onClick={handleLogout} className="bg-blue-500 text-white px-4 py-1 rounded-lg hover:bg-blue-600 transition">
+             <>
+             <p>{user.email}</p>
+             <button onClick={handleLogout} className="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600 transition">
              Logout
            </button>
+             </>
            
         ) : ( 
        
@@ -71,15 +74,20 @@ const Navbar = () => {
         )
          }
 
-        
+      {user && (
+         <>
           <FiHeart className="text-xl hover:text-blue-500 transition cursor-pointer" />
           <Link to="/cart" className="text-xl hover:text-blue-500 transition cursor-pointer relative">
-          <FiShoppingBag  />
+       
+          <FiShoppingBag />
           <span className="absolute top-0 left-3 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
                     {totalQuantity}
                 </span>
-
           </Link>
+
+
+          </>
+          )}
         </div>
       </div>
 
@@ -90,6 +98,14 @@ const Navbar = () => {
         <Link to="/products" className="hover:text-blue-500 transition">Products</Link>
         <Link to="/coach" className="hover:text-blue-500 transition">Coach</Link>
         <Link to="/about" className="hover:text-blue-500 transition">About Us</Link>
+        {user && !user.isAdmin && (<Link to="/profile" className="hover:text-blue-500 transition">Profile</Link>)}
+      {user && user.isAdmin && (<Link to="/admin/dashboard" className="hover:text-blue-500 transition">Dashboard</Link>)}
+
+
+
+
+
+
 
       </div>
     </nav>

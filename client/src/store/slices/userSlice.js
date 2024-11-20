@@ -14,7 +14,6 @@ const userSlice = createSlice({
     setUserData(state, action) {
       state.user = action.payload;
       state.isAuthenticated = true;
-      state.error = null;
     },
 
     // Action to log out the user

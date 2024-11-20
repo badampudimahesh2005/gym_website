@@ -4,11 +4,13 @@ import { useDispatch } from "react-redux";
 import apiClient from "../lib/apiClient";
 import { FaRegEyeSlash,FaRegEye} from "react-icons/fa";
 import { setUserData } from "../store/slices/userSlice";
+import { useNavigate } from "react-router-dom";
 
 
  const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const defaultValues = {
     firstName: "",
@@ -51,10 +53,10 @@ import { setUserData } from "../store/slices/userSlice";
   const handleSignup = async () => {
     try {
       const response=await apiClient.post('/auth/register', user,{withCredentials:true});
-      alert('Registration successful! Please log in.');
-      if(response.status === 201 && response.data.user){
-       dispatch(setUserData(response.data.user));
-        navigate("/profile")
+
+      if(response.data){
+       dispatch(setUserData(response.data));
+      navigate('/');
     }
     } catch (error) {
       alert('Error: ' + error.response?.data?.message || 'Registration failed');
