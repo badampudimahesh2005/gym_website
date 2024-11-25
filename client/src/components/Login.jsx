@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { FaRegEyeSlash,FaRegEye} from "react-icons/fa";
 import { setUserData } from '../store/slices/userSlice';
 import { useDispatch } from 'react-redux';
+import {toast} from 'react-toastify';
+import { toastStyle } from '../utils/toastStyle';
 
 
 
@@ -27,12 +29,12 @@ const Login = () => {
     try {
       const response = await apiClient.post('/auth/login',credentials, {withCredentials: true});
       dispatch(setUserData(response.data));
-      console.log(response.data);
       sessionStorage.setItem('isAuthenticated', 'true');
-      sessionStorage.setItem('userData', JSON.stringify(response.data)); // Store user data
-    navigate('/');
+      sessionStorage.setItem('userData', JSON.stringify(response.data)); // Store user data  
+      toast.success("Login successful",toastStyle);
+      navigate('/');
     } catch (error) {
-      alert('Login failed: ' + error.response?.data?.message);
+      toast.error('Login failed: ' + error.response?.data?.message);
     }
   };
 

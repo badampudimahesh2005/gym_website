@@ -1,7 +1,7 @@
 // src/components/Footer.jsx
 import React from 'react';
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
-
+import { Link } from 'react-router-dom';
 const Footer = () => {
   return (
     <footer className="bg-gradient-to-b to-black from-gray-900 text-white py-6 ">
@@ -20,10 +20,10 @@ const Footer = () => {
           <div>
             <h3 className="m-10 text-xl font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2 text-gray-400">
-              <li><a href="/workout-plans" className="hover:text-blue-500 transition-colors">Workout Plans</a></li>
-              <li><a href="/products" className="hover:text-blue-500 transition-colors">Products</a></li>
-              <li><a href="/coach" className="hover:text-blue-500 transition-colors">Coaches</a></li>
-              <li><a href="/about-us" className="hover:text-blue-500 transition-colors">About Us</a></li>
+              <li><Link to="/plans" className="hover:text-blue-500 transition-colors">Workout Plans</Link></li>
+              <li><Link to="/products" className="hover:text-blue-500 transition-colors">Products</Link></li>
+              <li><Link to="/coach" className="hover:text-blue-500 transition-colors">Coaches</Link></li>
+              <li><Link to="/about" className="hover:text-blue-500 transition-colors">About Us</Link></li>
             </ul>
           </div>
 

@@ -4,6 +4,8 @@ import { useSelector,useDispatch } from "react-redux";
 import { logoutUser } from "../store/slices/userSlice";
 import {Link , useNavigate } from "react-router-dom";
 import apiClient from "../lib/apiClient";
+import { toast } from "react-toastify";
+import { toastStyle } from "../utils/toastStyle";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -18,11 +20,13 @@ const Navbar = () => {
     const response = await apiClient.get("/auth/logout");
     dispatch(logoutUser());
     sessionStorage.removeItem('isAuthenticated');
+    toast.success("logout successful",toastStyle);
+
     navigate("/login");
     
 
   }catch(error){
-    console.error(error);
+    toast.error(error);
     }
 
  }

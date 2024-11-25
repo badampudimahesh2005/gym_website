@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
-import { removeItemFromCart,addItemToCart } from '../store/slices/cartSlice';
+import { removeItemFromCart,addItemToCart } from '../../store/slices/cartSlice';
 
 const ItemCard = ({items}) => {
     const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const ItemCard = ({items}) => {
     <div>
 
      {items.map((item) => (
-        <div  key={item._id}  className=' flex flex-col border-b-2 border-gray-200 '>
+        <div  key={item._id}  className=' flex flex-col border-b-2 border-gray-200/50 '>
                         <div className='m-2 p-2 text-start flex flex-row justify-between'>
                             {/* Product Image */}
                          
@@ -35,9 +35,9 @@ const ItemCard = ({items}) => {
                           
                                                      
                                 <div className="flex items-center space-x-2">
-                                <button className="bg-gray-700 px-2 py-1 rounded text-white" onClick={() => handleRemove(item.id)}>-</button>
+                                <button className="bg-gray-700 px-1 py-0 rounded text-white" onClick={() => handleRemove(item.id)}>-</button>
                                 <span>{item.quantity}</span>
-                                <button className="bg-gray-700 px-2 py-1 rounded text-white" onClick={()=>handleAddToCart(item)}>+</button>
+                                <button className="bg-gray-700 px-1 py-0 rounded text-white" onClick={()=>handleAddToCart(item)}>+</button>
                           
                                 <span className="text-lg font-semibold">${item.totalPrice.toFixed(2)}</span>
                                </div>

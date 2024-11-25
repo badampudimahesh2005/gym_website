@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import apiClient from "../../lib/apiClient";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-
+import { toastStyle } from "../../utils/toastStyle";
+import { toast } from "react-toastify";
 
 const UpdateProduct = () => {
     const {id} = useParams();
@@ -45,9 +46,10 @@ const UpdateProduct = () => {
         const handleUpdate = async () => {
             try {
                 const response = await apiClient.put(`/api/products/${id}`, product);
+                toast.success("Product updated successfully!", toastStyle);
                 navigate(`/products/${id}`);
             } catch (err) {
-                console.error("Failed to update product:", err);
+                toast.error("Failed to update product:", err);
             }
         };
     

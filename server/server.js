@@ -53,9 +53,7 @@ async function main() {
 }
 
 
-app.get("/", (req, res) => {
-  res.send("Server is running!");
-});
+
 
 app.use('/api/products', productsRoutes);
 app.use('/auth', authRoutes);

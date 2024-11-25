@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import apiClient from "../../lib/apiClient";
 
+
 const AddProduct = () => {
     const navigate = useNavigate();
     const [product, setProduct] = useState({

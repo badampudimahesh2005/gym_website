@@ -5,20 +5,27 @@ import apiClient from "../lib/apiClient";
 import { FaRegEyeSlash,FaRegEye} from "react-icons/fa";
 import { setUserData } from "../store/slices/userSlice";
 import { useNavigate } from "react-router-dom";
-
+import {toast} from 'react-toastify';
 
  const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const toastStyle ={
+    theme:"dark",
+    position: "bottom-right",
+    hideProgressBar: true,
+    closeOnClick: true,
+    autoClose: 3000,
 
+  }
   const defaultValues = {
     firstName: "",
     lastName: "",
     email: "",
-    age: 0,
-    height: 0,
-    weight: 0,
+    age: "",
+    height: "",
+    weight: "",
     gender: "",
     password: "",
   };
@@ -30,36 +37,46 @@ import { useNavigate } from "react-router-dom";
     setUser({ ...user, [name]: value });
   };
 
-  const handleClick = () => {
-    if (
-      !user.firstName ||
-      !user.lastName ||
-      !user.email ||
-      !user.password ||
-      !user.age ||
-      !user.height ||
-      !user.weight ||
-      !user.gender
-    ) {
-      alert("All fields are mandatory. Please fill all the details.");
-    } else {
-    //   dispatch(registerUser(user));
-      setUser(defaultValues);
-      alert("Your account is created. We've created your account for you.");
-    }
-  };
-
-
+  
   const handleSignup = async () => {
+
+    //VALIDATION
+    if (!user.firstName || !user.lastName || !user.email || !user.password || 
+      !user.age || !user.height || !user.weight || !user.gender) {
+    toast.error("All fields are mandatory. Please fill all the details.",toastStyle);
+    return;
+  }
+  //Email validation
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(user.email)) {
+    toast.error("Please enter a valid email address.",toastStyle);
+    return;
+  }
+
+  // Additional validation for age, height, and weight (if needed)
+  if (user.age <= 0) {
+    toast.error("Please enter a valid age.",toastStyle);
+    return;
+  }
+  if (user.height <= 0) {
+    toast.error("Please enter a valid height.",toastStyle);
+    return;
+  }
+  if (user.weight <= 0) {
+    toast.error("Please enter a valid weight.",toastStyle);
+    return;
+  }
+
     try {
       const response=await apiClient.post('/auth/register', user,{withCredentials:true});
 
       if(response.data){
-       dispatch(setUserData(response.data));
+      dispatch(setUserData(response.data));
+      toast.success("SignUp successful",toastStyle);
       navigate('/');
     }
     } catch (error) {
-      alert('Error: ' + error.response?.data?.message || 'Registration failed');
+      toast.error('Error: ' + error.response?.data?.message || 'Registration failed', toastStyle);
     }
   };
 

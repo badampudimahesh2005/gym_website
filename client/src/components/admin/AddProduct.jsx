@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import apiClient from "../../lib/apiClient";
+import { toastStyle } from "../../utils/toastStyle";
+import { toast } from "react-toastify";
 
 const AddProduct = ({ onProductAdded }) => {
-    const navigate = useNavigate();
     const [product, setProduct] = useState({
         name: '',
         description: '',
         price: '',
         image: '',
         category: '',
-        inStock: 0,
+        inStock: '',
     });
 
     const [errors, setErrors] = useState({});
@@ -46,6 +46,7 @@ const AddProduct = ({ onProductAdded }) => {
         try {
             const response= await apiClient.post("/api/products", product,{withCredentials:true});
             onProductAdded();
+            toast.success('Product added successfully', toastStyle);
             setProduct(
               {
                 name: '',
@@ -53,7 +54,7 @@ const AddProduct = ({ onProductAdded }) => {
                 price: '',
                 image: '',
                 category: '',
-                inStock: 0,
+                inStock: '',
               }
             )
         } catch (err) {

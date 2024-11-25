@@ -2,6 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 import apiClient from "../../lib/apiClient";
+import { toastStyle } from "../../utils/toastStyle";
+import { toast } from "react-toastify";
+
+
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
   const [newUser, setNewUser] = useState({
@@ -27,9 +31,22 @@ const ManageUsers = () => {
 
   const handleAddUser = async (e) => {
     e.preventDefault();
+    const {firstName, lastName, email, password, age, height,  weight} = newUser;
+    if(!firstName || !lastName || !email || !password || !age || !height || !weight) {
+      toast.error("Please fill in all fields", toastStyle);
+      return;
+     } 
+
+     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+     if (!emailPattern.test(email)) {
+       toast.error("Please enter a valid email address.",toastStyle);
+       return;
+     }
+     
     try {
       await apiClient.post("/api/admin/users", newUser);
       fetchUsers(); // Refresh the user list
+      toast.success("user added successfully", toastStyle);
       setNewUser({
         firstName: "",
         lastName: "",
@@ -42,7 +59,7 @@ const ManageUsers = () => {
         isAdmin: false
         });
     } catch (err) {
-      console.error("Error adding user", err);
+      toast.error("Error adding user", err);
     }
   };
 
@@ -50,8 +67,9 @@ const ManageUsers = () => {
     try {
       await apiClient.delete(`/api/admin/users/${userId}`,{withCredentials:true});
       fetchUsers(); // Refresh the user list
+      toast.success("User deleted successfully", toastStyle);
     } catch (err) {
-      console.error("Error deleting user", err);
+      toast.error("Error deleting user", err);
     }
   };
 
@@ -143,7 +161,7 @@ const ManageUsers = () => {
             <span>Admin</span>
           </label>
         </div>
-        <button type="submit" className="mt-4 p-2 bg-blue-500 text-white">
+        <button type="submit" className="mt-4 p-2 bg-blue-500 text-white rounded font-bold">
           Add User
         </button>
       </form>

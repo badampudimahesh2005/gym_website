@@ -17,13 +17,15 @@ import { useDispatch } from "react-redux";
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ShowProduct from "./components/products/ShowProduct";
-import Cart from "./components/Cart";
+import Cart from "./components/cart/Cart";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import { setUserData } from '../src/store/slices/userSlice';
 import { useSelector } from "react-redux";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -58,6 +60,8 @@ function App() {
 
   return (
     <div className="App">
+    <ToastContainer />
+
       {isLoading ? (
         <LoadingScreen onComplete={handleLoadingComplete} />
       ) : (
@@ -76,7 +80,6 @@ function App() {
           }
 
           
-         <Route path="*" element={<h1>Not Found</h1>} />
           <Route path="/" element={<LandingPage />} />
           <Route path="/coach" element={<Coach />} />
           <Route path="/about" element={<About />} />
@@ -94,7 +97,7 @@ function App() {
             <Route path="/admin/dashboard" element={<Navigate to="/" />} />
             <Route path="/add-product" element={<Navigate to="/" />} />
             <Route path="/update-product/:id" element={<Navigate to="/" />} />
-            <Route path="/products/:id" element={<Navigate to="/" />} />
+            <Route path="/products/:id" element={<ShowProduct />} />
             <Route path="/products" element={<Products />} />
            <Route path="/cart" element={<Cart />} />
             <Route path="/plans" element={<WorkoutPlans />} />

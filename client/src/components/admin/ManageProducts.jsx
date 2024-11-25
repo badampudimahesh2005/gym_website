@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import apiClient from "../../lib/apiClient";
 import { Link } from "react-router-dom";
 import AddProduct from "./AddProduct";
+import { toastStyle } from "../../utils/toastStyle";
+import { toast } from "react-toastify";
 
 
 const ManageProducts = () => {
@@ -21,9 +23,11 @@ const ManageProducts = () => {
   const handleDeleteProduct = async(id)=>{
     try {
       const response = await apiClient.delete(`/api/products/${id}`);
-      fetchProducts();  
+      fetchProducts(); 
+      toast.success("Product deleted successfully", toastStyle);
+
   } catch (error) {
-      console.error("Failed to delete product:", error);
+      toast.error("Failed to delete product:", error);
   }
   }
 

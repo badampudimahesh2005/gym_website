@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import apiClient from "../../lib/apiClient";
+import {toast} from 'react-toastify';
+import { toastStyle } from "../../utils/toastStyle";
 
 const AddAdmin = () => {
   const [formData, setFormData] = useState({
@@ -13,8 +15,7 @@ const AddAdmin = () => {
     weight: "",
   });
 
-  const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,12 +24,11 @@ const AddAdmin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSuccessMessage("");
-    setErrorMessage("");
+   
 
     try {
       const response = await apiClient.post("/api/admin/add-admin", formData,{withCredentials:true});
-      setSuccessMessage(response.data.message);
+      toast.success(response.data.message,toastStyle);
       setFormData({
         firstName: "",
         lastName: "",
@@ -40,7 +40,7 @@ const AddAdmin = () => {
         weight: "",
       });
     } catch (error) {
-      setErrorMessage(error.response?.data?.message || "Error creating admin.");
+      toast.error(error.response?.data?.message || "Error creating admin.",toastStyle);
     }
   };
 
@@ -123,17 +123,12 @@ const AddAdmin = () => {
         </div>
         <button
           type="submit"
-          className=" p-3 bg-blue-600 hover:bg-blue-500 text-white rounded"
+          className=" p-3 bg-blue-600 hover:bg-blue-500 text-white rounded font-bold"
         >
           Add Admin
         </button>
       </form>
-      {successMessage && (
-        <div className="mt-4 text-green-600 font-bold">{successMessage}</div>
-      )}
-      {errorMessage && (
-        <div className="mt-4 text-red-600 font-bold">{errorMessage}</div>
-      )}
+     
     </div>
   );
 };

@@ -2,7 +2,9 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ItemCard from './ItemCard';
 import { Link } from 'react-router-dom';
-import { clearCart } from '../store/slices/cartSlice';
+import { clearCart } from '../../store/slices/cartSlice';
+import { toast } from 'react-toastify';
+import { toastStyle } from '../../utils/toastStyle';
 
 const CartPage = () => {
     const cartItems = useSelector((state) => state.cart.items); // Get cart items from Redux
@@ -13,6 +15,7 @@ const CartPage = () => {
     };
     const handleClearCart = () => {
         dispatch(clearCart());
+        toast.success('Cart cleared successfully!', toastStyle);
     }
 
    
@@ -24,13 +27,19 @@ const CartPage = () => {
                 
                 <div className={`${cartItems.length == 0? "w-full":"w-2/3"} mr-6 bg-gray-800 p-6 rounded-lg shadow-lg`}>
 
-               <div className='flex justify-between items-center'>
-               <h2 className="text-2xl font-bold mb-4">Total Products in Cart: {cartItems.length}</h2>
-               {cartItems.length > 0 &&  <button onClick={handleClearCart} className='text-white bg-red-600/75  rounded-md p-2 m-4'>clear cart</button> }
-               </div>
+               {cartItems.length > 0 && (
+                <div className='flex justify-between items-center'>
+                <h2 className="text-xl font-bold mb-4">Total Products in Cart: {cartItems.length}</h2>
+               <button onClick={handleClearCart} className='text-white bg-red-600/75  rounded-md p-2 m-4'>clear cart</button> 
+                </div>
+               )}
 
                    <ItemCard items={cartItems} />
-                   {cartItems.length === 0 && <p className="text-center">No items in cart</p>}
+                   {cartItems.length === 0 && <>
+                   <p className="text-center text-2xl mt-6 font-bold text-blue-500">No items in cart </p>
+                   <p className='text-center text-2xl '>Add some items to cart </p>
+                   
+                   </>}
 
                 </div>
 

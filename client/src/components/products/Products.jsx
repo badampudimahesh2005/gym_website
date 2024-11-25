@@ -7,7 +7,6 @@ import { setProducts, setLoading,  } from "../../store/slices/productsSlice";
 
 import { Link } from "react-router-dom";
 
-import image1 from "./images/image1.png"
 import image2 from "./images/image2.png"
 
 const Products = () => {
@@ -19,10 +18,10 @@ const Products = () => {
       const fetchProducts = async () => {
           dispatch(setLoading());
           try {
-              const response = await apiClient.get("/api/products");
+              const response = await apiClient.get("/api/products", {withCredentials:true});
               dispatch(setProducts(response.data));
           } catch (err) {
-              console.error("Failed to fetch products:", err);
+              toast.error("Failed to fetch products:", err);
           }
       };
 
@@ -48,11 +47,7 @@ const Products = () => {
             className="absolute w-[200px] md:w-[350px] lg:w-[400px] xl:w-[600px] right-[-50px]"
             alt="Banner"
           />
-          {/* <img
-            src={wave}
-            className="absolute top-[-400px] opacity-20"
-            alt="Wave"
-          /> */}
+         
           <img
             src={image2}
             className="absolute w-[200px] md:w-[350px] lg:w-[400px] xl:w-[600px] left-[-50px] transform scale-x-[-1]"

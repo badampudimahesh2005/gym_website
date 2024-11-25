@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { addItemToCart } from "../../store/slices/cartSlice";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
+import { toastStyle } from "../../utils/toastStyle";
+import { toast } from "react-toastify";
 
 
 const ShowProduct = () => {
@@ -23,6 +24,7 @@ const ShowProduct = () => {
             price: product.price,
             image: product.image,
         }));
+        toast.success("Product added to cart successfully", toastStyle);
     };
 
     useEffect(() => {
@@ -43,10 +45,11 @@ const ShowProduct = () => {
     const handleDelete = async () => {
         try {
             const response = await apiClient.delete(`/api/products/${id}`);
+            toast.success("product deleted successfully",toastStyle);
             navigate("/products");
         
         } catch (error) {
-            console.error("Failed to delete product:", error);
+            toast.error("Failed to delete product:", error);
         }
     };
 
