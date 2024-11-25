@@ -8,6 +8,7 @@ const session = require("express-session");
 const jwt = require("jsonwebtoken");
 const passportConfig = require("./config/passportConfig");
 const authRoutes = require("./routes/auth");
+const adminRoutes = require("./routes/admin");
 dotenv.config();
 
 
@@ -58,6 +59,7 @@ app.get("/", (req, res) => {
 
 app.use('/api/products', productsRoutes);
 app.use('/auth', authRoutes);
+app.use('/api/admin',adminRoutes );
 
 // Start the server
 app.listen(PORT, () => {

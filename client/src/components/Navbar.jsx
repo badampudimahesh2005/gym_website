@@ -1,5 +1,4 @@
 
-
 import { FiHeart, FiShoppingBag } from "react-icons/fi";
 import { useSelector,useDispatch } from "react-redux";
 import { logoutUser } from "../store/slices/userSlice";
@@ -10,7 +9,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const user = useSelector((state) => state.user.user);
+  const {user,isAdmin,isAuthenticated} = useSelector((state) => state.user);
 
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
 
@@ -18,6 +17,7 @@ const Navbar = () => {
   try{
     const response = await apiClient.get("/auth/logout");
     dispatch(logoutUser());
+    sessionStorage.removeItem('isAuthenticated');
     navigate("/login");
     
 
@@ -74,7 +74,7 @@ const Navbar = () => {
         )
          }
 
-      {user && (
+      {user && !isAdmin && (
          <>
           <FiHeart className="text-xl hover:text-blue-500 transition cursor-pointer" />
           <Link to="/cart" className="text-xl hover:text-blue-500 transition cursor-pointer relative">
@@ -98,8 +98,8 @@ const Navbar = () => {
         <Link to="/products" className="hover:text-blue-500 transition">Products</Link>
         <Link to="/coach" className="hover:text-blue-500 transition">Coach</Link>
         <Link to="/about" className="hover:text-blue-500 transition">About Us</Link>
-        {user && !user.isAdmin && (<Link to="/profile" className="hover:text-blue-500 transition">Profile</Link>)}
-      {user && user.isAdmin && (<Link to="/admin/dashboard" className="hover:text-blue-500 transition">Dashboard</Link>)}
+        {user && !isAdmin && (<Link to="/profile" className="hover:text-blue-500 transition">Profile</Link>)}
+      {user && isAdmin && (<Link to="/admin/dashboard" className="hover:text-blue-500 transition">Dashboard</Link>)}
 
 
 

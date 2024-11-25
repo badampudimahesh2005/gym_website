@@ -109,7 +109,7 @@ const Plans = () => {
                 <Link to="/">Home</Link>
               </li>
               <li className="transition transform hover:scale-105">
-                <Link to="/our-services">Plans</Link>
+                <Link to="/plans">Plans</Link>
               </li>
             </ul>
           </nav>

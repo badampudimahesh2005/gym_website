@@ -32,14 +32,7 @@ const Products = () => {
   
 
 
-//   const handleDeleteProduct = async (productId) => {
-//       try {
-//           await apiClient.delete(`/api/products/${productId}`);
-//           dispatch(removeProduct(productId));
-//       } catch (err) {
-//           console.error("Failed to delete product:", err);
-//       }
-//   };
+
 
 
     return (
@@ -49,15 +42,7 @@ const Products = () => {
               {/* Banner Section */}
         <div className="relative flex flex-col items-center justify-center h-[70vh] space-y-5 bg-gradient-to-b from-gray-700 to-black overflow-hidden">
           <h1 className="text-white mt-12 text-4xl md:text-5xl lg:text-6xl">Products</h1>
-          <nav className="text-white">
-            <ul className="flex space-x-3">
-              <li className="transition transform hover:scale-105">
-              <Link to="/add-product" className=" text-white font-semibold">
-            Add Product
-           </Link>
-              </li>
-            </ul>
-          </nav>
+         
           <img
             src={image2}
             className="absolute w-[200px] md:w-[350px] lg:w-[400px] xl:w-[600px] right-[-50px]"

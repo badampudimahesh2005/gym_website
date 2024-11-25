@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
     weight: { type: Number, required: true },
     isAdmin: { type: Boolean, default: false },
 
-
+    
 });
 
 userSchema.pre('save', async function (next) {

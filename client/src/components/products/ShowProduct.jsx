@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import apiClient from "../../lib/apiClient";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addItemToCart } from "../../store/slices/cartSlice";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 
+
 const ShowProduct = () => {
     const { id } = useParams(); // Get the product ID from the route parameters using hook useParams
     const [product, setProduct] = useState(null);
+    const {isAdmin} = useSelector((state) => state.user);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -73,12 +75,18 @@ const ShowProduct = () => {
                     </ul>
                     {/* Quantity and Add to Cart */}
                    
+                   {!isAdmin && (
                     <button onClick={handleAddToCart} className="bg-blue-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-600 transition mr-4">Add to Cart</button>
-                    <Link to={`/update-product/${id}`} >
+                   )}
+                    {isAdmin && (
+                        <>
+                     <Link to={`/update-product/${id}`} >
                     <button className="bg-blue-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-600 transition mr-4">Edit</button>
                     </Link>
                      <button onClick={handleDelete} className="bg-blue-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-600 transition mr-4">Delete</button>
 
+                        </>
+                    )}
                     <div className="mt-6 space-y-2 text-sm text-gray-300">
                         <p>🚚 Free Shipping + returns</p>
                         <p>💬 24/7 Customer Support</p>

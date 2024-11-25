@@ -10,19 +10,38 @@ const AddProduct = () => {
         price: '',
         image: '',
         category: '',
-        inStock: false,
+        inStock: 0,
     });
+
+    const [errors, setErrors] = useState({});
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setProduct({ ...product, [name]: value });
     };
 
-    const handleCheckboxChange = (e) => {
-        setProduct({ ...product, inStock: e.target.checked });
-    };
+   
+
+
+    const validateProduct = () => {
+      const newErrors = {};
+      if (!product.name) newErrors.name = "Product name is required.";
+      if (!product.description) newErrors.description = "Description is required.";
+      if (!product.price) newErrors.price = "Price is required.";
+      if (isNaN(product.price) || product.price <= 0) newErrors.price = "Price must be a positive number.";
+      if (!product.image) newErrors.image = "Image URL is required.";
+      if (!product.category) newErrors.category = "Category is required.";
+      
+      return newErrors;
+  };
+
 
     const handleAddProduct = async () => {
+      const validationErrors = validateProduct();
+      if (Object.keys(validationErrors).length > 0) {
+          setErrors(validationErrors);
+          return; // Stop the process if there are validation errors
+      }
         try {
             const response= await apiClient.post("/api/products", product,{withCredentials:true});
             navigate("/products");
@@ -38,7 +57,7 @@ const AddProduct = () => {
           <div className="flex flex-col items-center justify-center space-y-4">
       
             <div className="flex flex-col w-2/3">
-              <label  className="text-gray-300 mb-1">Product Name</label>
+              <label  className="text-gray-300 mb-1  font-bold">Product Name</label>
               <input
                 type="text"
                 name="name"
@@ -47,10 +66,11 @@ const AddProduct = () => {
                 onChange={handleInputChange}
                 className="p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500  text-black"
               />
+              {errors.name && <span className="error text-red-500">{errors.name}</span>}
             </div>
       
             <div className="flex flex-col w-2/3">
-              <label  className="text-gray-300 mb-1">Description</label>
+              <label  className="text-gray-300 mb-1 font-bold">Description</label>
               <textarea
               name="description"
               placeholder="Description"
@@ -58,11 +78,11 @@ const AddProduct = () => {
                 onChange={handleInputChange}
                 className="p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500  text-gray-600"
                 />
-             
+              {errors.description && <span className="error text-red-500">{errors.description}</span>}
             </div>
       
             <div className="flex flex-col w-2/3">
-              <label  className="text-gray-300 mb-1">Price</label>
+              <label  className="text-gray-300 mb-1 font-bold">Price</label>
               <input
                 type="number"
                 name="price"
@@ -71,10 +91,11 @@ const AddProduct = () => {
                 onChange={handleInputChange}
                 className="p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500  text-black"
               />
+               {errors.price && <span className="error text-red-500">{errors.price}</span>}
             </div>
       
             <div className="flex flex-col w-2/3">
-              <label className="text-gray-300 mb-1">Image URL</label>
+              <label className="text-gray-300 mb-1 font-bold">Image URL</label>
               <input
                 type="text"
                 name="image"
@@ -83,10 +104,11 @@ const AddProduct = () => {
                 onChange={handleInputChange}
                 className="p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500  text-black"
               />
+              {errors.image && <span className="error text-red-500">{errors.image}</span>}
             </div>
       
             <div className="flex flex-col w-2/3">
-              <label  className="text-gray-300 mb-1">Category</label>
+              <label  className="text-gray-300 mb-1 font-bold">Category</label>
               <input
                 type="text"
                 name="category"
@@ -97,15 +119,17 @@ const AddProduct = () => {
               />
             </div>
       
-            <div className="flex items-center w-2/3 space-x-2 text-gray-300">
-              <input
-                type="checkbox"
+            <div className="flex flex-col w-2/3">
+            <label  className="text-gray-300 mb-1 font-bold">InStock</label>  
+               <input
+                type="number"
                 name="inStock"
-                checked={product.inStock}
-                onChange={handleCheckboxChange}
-                className="form-checkbox h-5 w-5 text-green-500 border-gray-600"
+                placeholder="instock"
+                value={product.inStock}
+                onChange={handleInputChange}
+                className="p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500  text-black"
               />
-              <label>In Stock</label>
+              {errors.inStock && <span className="error text-red-500">{errors.inStock}</span>}
             </div>
       
             <button
@@ -117,6 +141,7 @@ const AddProduct = () => {
           </div>
         </div>
       </div>
+      
       
     );
 };

@@ -28,7 +28,8 @@ const Login = () => {
       const response = await apiClient.post('/auth/login',credentials, {withCredentials: true});
       dispatch(setUserData(response.data));
       console.log(response.data);
-    
+      sessionStorage.setItem('isAuthenticated', 'true');
+      sessionStorage.setItem('userData', JSON.stringify(response.data)); // Store user data
     navigate('/');
     } catch (error) {
       alert('Login failed: ' + error.response?.data?.message);
