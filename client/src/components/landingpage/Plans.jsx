@@ -1,5 +1,4 @@
-// src/landing-page/Plans.jsx
-import React from "react";
+
 
 const Plans = () => {
   const plans = [
