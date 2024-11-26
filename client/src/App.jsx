@@ -79,7 +79,7 @@ function App() {
             )
           }
 
-          
+          <Route path="*" element={<Navigate to="/"/>} />
           <Route path="/" element={<LandingPage />} />
           <Route path="/coach" element={<Coach />} />
           <Route path="/about" element={<About />} />

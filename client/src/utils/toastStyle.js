@@ -1,9 +1,10 @@
 export const toastStyle ={
     theme:"dark",
     position: "bottom-right",
-    hideProgressBar: true,
+    hideProgressBar: false,
     closeOnClick: true,
     autoClose: 3000,
+    onmouseover:true,
 
   }
   

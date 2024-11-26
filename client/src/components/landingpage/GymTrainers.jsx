@@ -4,7 +4,9 @@
 // src/components/GymTrainer.jsx
 import React from 'react';
 import { FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa';
-import trainer1 from "./front-images/front2.jpg";
+import trainer1 from "./front-images/trainer1.jpg";
+import trainer2 from "./front-images/trainer2.jpg"
+import trainer3 from "./front-images/trainer3.jpg"
 
 
 const trainers = [
@@ -21,7 +23,7 @@ const trainers = [
   {
     name: "Anna Scott",
     role: "Fitness Trainer",
-    imgSrc: trainer1, // Replace with your image path
+    imgSrc: trainer2, // Replace with your image path
     social: [
       { icon: <FaFacebookF />, link: "#" },
       { icon: <FaTwitter />, link: "#" },
@@ -31,7 +33,7 @@ const trainers = [
   {
     name: "Sarah Doe",
     role: "Yoga Instructor",
-    imgSrc: trainer1, // Replace with your image path
+    imgSrc: trainer3, // Replace with your image path
     social: [
       { icon: <FaFacebookF />, link: "#" },
       { icon: <FaTwitter />, link: "#" },
@@ -42,8 +44,8 @@ const trainers = [
 
 const GymTrainer = () => {
   return (
-    <div className="p-8 bg-black text-white">
-      <h2 className="text-3xl font-bold text-center mb-8">Our Trainers</h2>
+    <div className="p-8  bg-black text-white">
+      <h2 className="text-3xl font-bold text-center   mt-32">Our Trainers</h2>
       <div className="flex flex-wrap justify-center gap-8">
         {trainers.map((trainer, index) => (
           <div

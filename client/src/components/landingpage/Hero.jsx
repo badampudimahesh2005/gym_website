@@ -1,6 +1,6 @@
 // src/components/Hero.js
 import React, { useEffect, useState } from "react";
-import front1 from "./front-images/front1.jpg";
+import front1 from "./front-images/front7.jpg";
 import front2 from "./front-images/front2.jpg";
 import front3 from "./front-images/front3.jpg";
 

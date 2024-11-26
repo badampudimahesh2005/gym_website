@@ -22,10 +22,10 @@ const CartPage = () => {
 
     return (
         <div className="min-h-screen bg-black text-white p-8 flex justify-center">
-            <div className="flex w-full max-w-5xl">
+            <div className="flex flex-col md:flex-row  w-full max-w-5xl">
                 {/* Left Side - Cart Items */}
                 
-                <div className={`${cartItems.length == 0? "w-full":"w-2/3"} mr-6 bg-gray-800 p-6 rounded-lg shadow-lg`}>
+                <div className={`${cartItems.length == 0? "md:w-full":"md:w-2/3"} mr-6 bg-gray-800 p-6 rounded-lg shadow-lg mb-10 w-full `}>
 
                {cartItems.length > 0 && (
                 <div className='flex justify-between items-center'>
@@ -46,7 +46,7 @@ const CartPage = () => {
 
                 {/* Right Side - Order Summary */}
 
-              {cartItems.length > 0 &&  (  <div className="w-1/3 bg-gray-800 p-6 rounded-lg shadow-lg h-2/3">
+              {cartItems.length > 0 &&  (  <div className=" w-full md:w-2/3 bg-gray-800 p-6 rounded-lg shadow-lg h-2/3">
                     <h2 className="text-2xl font-bold mb-4">Order Summary</h2>
                     <div className="text-lg mb-2">
                         <span>Subtotal</span>
