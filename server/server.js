@@ -9,6 +9,7 @@ const jwt = require("jsonwebtoken");
 const passportConfig = require("./config/passportConfig");
 const authRoutes = require("./routes/auth");
 const adminRoutes = require("./routes/admin");
+const MongoStore = require("connect-mongo");
 dotenv.config();
 
 
@@ -26,11 +27,28 @@ app.use(cors({
 
 app.use(express.json()); // For parsing JSON bodies
 app.use(express.urlencoded({ extended: true })); // For parsing URL-encoded bodies
+
+const sessionStore = MongoStore.create({
+  mongoUrl: process.env.MONGO_URI, 
+  collection: 'sessions',
+  
+});
+
+sessionStore.on("error", function (err) {
+  console.log(err);
+});
+// Configure session
 app.use(session({
-  secret: process.env.JWT_SECRET,
+  secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: false,
-  cookie: { secure: false, httpOnly: true, maxAge: 24 * 60 * 60 * 1000 },
+  saveUninitialized: true,
+  store: sessionStore,
+  cookie: {
+     secure: false,
+     httpOnly: true,
+     maxAge: 24 * 60 * 60 * 1000,
+     expires: Date.now() + 24 * 60 * 60 * 1000
+       },
 }));
 app.use(passport.initialize());
 app.use(passport.session());
