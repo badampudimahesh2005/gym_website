@@ -55,7 +55,7 @@ const ShowProduct = () => {
         }
     };
 
-    if (product) return (
+    if (!product) return (
     <div className="bg-black h-screen flex justify-center items-center">
         <div className=" w-[500px]  mx-auto">
     <img src={loadingGif} alt="loadin-image" className=" mx-auto md:w-full  object-cover object-center rounded-lg" />
