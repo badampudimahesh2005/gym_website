@@ -34,7 +34,7 @@ const Hero = () => {
     useEffect(() => {
       const intervalId = setInterval(() => {
         setCurrentSlideIndex((prevIndex) => (prevIndex + 1) % slides.length);
-      }, 5000); // Change slide every 5 seconds
+      }, 3000); // Change slide every 5 seconds
   
       return () => clearInterval(intervalId); // Clear interval on component unmount
     }, []);
