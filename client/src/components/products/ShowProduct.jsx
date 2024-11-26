@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { toastStyle } from "../../utils/toastStyle";
 import { toast } from "react-toastify";
 
+import loadingGif from "./images/loading.gif";
+
 
 const ShowProduct = () => {
     const { id } = useParams(); // Get the product ID from the route parameters using hook useParams
@@ -53,7 +55,13 @@ const ShowProduct = () => {
         }
     };
 
-    if (!product) return <div>Loading...</div>;
+    if (product) return (
+    <div className="bg-black h-screen flex justify-center items-center">
+        <div className=" w-[500px]  mx-auto">
+    <img src={loadingGif} alt="loadin-image" className=" mx-auto md:w-full  object-cover object-center rounded-lg" />
+    </div>
+        </div>
+   );
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-black text-white p-8">
