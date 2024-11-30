@@ -15,6 +15,15 @@ const ShowProduct = () => {
     const { id } = useParams(); // Get the product ID from the route parameters using hook useParams
     const [product, setProduct] = useState(null);
     const {isAdmin} = useSelector((state) => state.user);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoading(false); // Hide loader after 4 seconds
+        }, 3000); 
+
+        return () => clearTimeout(timer); // Cleanup timer on component unmount
+    }, []);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -55,7 +64,7 @@ const ShowProduct = () => {
         }
     };
 
-    if (!product) return (
+    if (loading) return (
     <div className="bg-black h-screen flex justify-center items-center">
         <div className=" w-[500px]  mx-auto">
     <img src={loadingGif} alt="loadin-image" className=" mx-auto md:w-full  object-cover object-center rounded-lg" />

@@ -9,6 +9,7 @@ const jwt = require("jsonwebtoken");
 const passportConfig = require("./config/passportConfig");
 const authRoutes = require("./routes/auth");
 const adminRoutes = require("./routes/admin");
+const emailRoutes = require("./routes/email");
 const MongoStore = require("connect-mongo");
 dotenv.config();
 
@@ -27,6 +28,7 @@ app.use(cors({
 
 app.use(express.json()); // For parsing JSON bodies
 app.use(express.urlencoded({ extended: true })); // For parsing URL-encoded bodies
+
 
 const sessionStore = MongoStore.create({
   mongoUrl: process.env.MONGO_URI, 
@@ -76,6 +78,8 @@ async function main() {
 app.use('/api/products', productsRoutes);
 app.use('/auth', authRoutes);
 app.use('/api/admin',adminRoutes );
+app.use('/api', emailRoutes);
+
 
 // Start the server
 app.listen(PORT, () => {

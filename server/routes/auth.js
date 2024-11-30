@@ -41,7 +41,7 @@ router.post('/register', async (req, res) => {
                 height: newUser.height,
                 weight: newUser.weight,
                 gender: newUser.gender,
-                isAdmin: true,
+                isAdmin: newUser.isAdmin,
 
             }
         );
